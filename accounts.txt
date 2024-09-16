@@ -1,0 +1,3 @@
+1000,Maddox,24certificateOfDepositType,1000
+1000,01,18savingsAccountType,1000
+1000,Maddox,18savingsAccountType,1000
