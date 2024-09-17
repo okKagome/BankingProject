@@ -49,33 +49,36 @@ void createAccount() {
 
         unique_ptr<bankAccountType> newAccount;
 
-        switch(accountType) {
-            case 1: {
-                double monthlyFee = getValidAmount("Enter monthly fee: $");
-                newAccount = make_unique<serviceChargeCheckingType>(name, accountNumber, initialBalance);
-                break;
-            }
-            case 2:
-                newAccount = make_unique<noServiceChargeCheckingType>(name, accountNumber, initialBalance);
-                break;
-            case 3: {
-                double interestRate = getValidAmount("Enter interest rate (as decimal): ");
-                newAccount = make_unique<savingsAccountType>(name, accountNumber, initialBalance, interestRate);
-                break;
-            }
-            case 4:
-                newAccount = make_unique<highInterestCheckingType>(name, accountNumber, initialBalance);
-                break;
-            case 5:
-                newAccount = make_unique<highInterestSavingsType>(name, accountNumber, initialBalance);
-                break;
-            case 6: {
-                double interestRate = getValidAmount("Enter interest rate (as decimal): ");
-                int maturityMonths = getValidInteger("Enter maturity period (in months): ");
-                newAccount = make_unique<certificateOfDepositType>(name, accountNumber, initialBalance, interestRate, maturityMonths);
-                break;
-            }
-        }
+
+
+			switch(accountType) {
+			    case 1: {
+			        double monthlyFee = getValidAmount("Enter monthly fee: $");
+			        newAccount = make_unique<serviceChargeCheckingType>(name, accountNumber, initialBalance, monthlyFee);
+			        break;
+			    }
+			    case 2:
+			        newAccount = make_unique<noServiceChargeCheckingType>(name, accountNumber, initialBalance);
+			        break;
+			    case 3: {
+			        double interestRate = getValidAmount("Enter interest rate (as decimal): ");
+			        newAccount = make_unique<savingsAccountType>(name, accountNumber, initialBalance, interestRate);
+			        break;
+			    }
+			    case 4:
+			        newAccount = make_unique<highInterestCheckingType>(name, accountNumber, initialBalance);
+			        break;
+			    case 5:
+			        newAccount = make_unique<highInterestSavingsType>(name, accountNumber, initialBalance);
+			        break;
+			    case 6: {
+			        double interestRate = getValidAmount("Enter interest rate (as decimal): ");
+			        int maturityMonths = getValidInteger("Enter maturity period (in months): ");
+			        newAccount = make_unique<certificateOfDepositType>(name, accountNumber, initialBalance, interestRate, maturityMonths);
+			        break;
+			    }
+			}
+
 
         saveAccount(newAccount);
         cout << "Account created successfully.\n";

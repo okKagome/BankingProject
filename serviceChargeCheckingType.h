@@ -1,36 +1,37 @@
-#ifndef SERVICECHECKINGCHARGETYPE_H
-#define SERVICECHECKINGCHARGETYPE_H
+#ifndef SERVICE_CHARGE_CHECKING_TYPE_H
+#define SERVICE_CHARGE_CHECKING_TYPE_H
 
-#include <string>
 #include "checkingAccountType.h"
+#include <string>
 
 using namespace std;
 
 class serviceChargeCheckingType: public checkingAccountType {
+public:
+    serviceChargeCheckingType(string n, int acctNumber, double bal);
+    serviceChargeCheckingType(string n, int acctNumber, double bal, double monthlyFee);
 
-	public:
-		serviceChargeCheckingType(string n, int acctNumber, double bal);
-		serviceChargeCheckingType(string n, int acctNumber, double bal, double serveChargeAmount, double serveChargeCheck);
+    double getServiceChargeAccount() const;
+    void setServiceChargeAccount(double amount);
+    double getServiceChargeChecks() const;
+    void setServiceChargeChecks(double amount);
+    int getNumberOfChecksWritten() const;
+    void setNumberOfChecksWritten(int num);
+    void postServiceCharge();
+    void writeCheck(double amount) override;
+    void createMonthlyStatement() override;
+    void print() override;
+    string getType() const override { return "Service Charge Checking"; }
 
-		double getServiceChargeAccount();
-		void setServiceChargeAccount(double amount);
-		double getServiceChargeChecks();
-		void setServiceChargeChecks(double amount);
-		int getNumberOfChecksWritten();
-		void setNumberOfChecksWritten(int num);
-		void postServiceCharge();
-		void writeCheck(double amount);
-		virtual void createMonthlyStatement();
-		virtual void print();
+protected:
+    double serviceChargeAccount;
+    double serviceChargeCheck;
+    int numberOfChecksWritten;
 
-	protected:
-		double serviceChargeAccount;
-		double serviceChargeCheck;
-		int numberOfChecksWritten;
-
-	private:
-		static const double ACCOUNT_SERVICE_CHARGE; // 10.00
-		static const int MAXIMUM_NUM_OF_CHECKS; // 5
-		static const double SERVICE_CHARGE_EXCESS_NUM_OF_CHECKS; // 5
+private:
+    static const double ACCOUNT_SERVICE_CHARGE;
+    static const int MAXIMUM_NUM_OF_CHECKS;
+    static const double SERVICE_CHARGE_EXCESS_NUM_OF_CHECKS;
 };
-#endif
+
+#endif // SERVICE_CHARGE_CHECKING_TYPE_H

@@ -47,19 +47,23 @@ vector<unique_ptr<bankAccountType>> loadAccounts() {
                 int accNum = stoi(accountNumber);
                 double bal = stod(balance);
 
-                if (type == typeid(serviceChargeCheckingType).name()) {
-                    account = make_unique<serviceChargeCheckingType>(name, accNum, bal);
-                } else if (type == typeid(noServiceChargeCheckingType).name()) {
-                    account = make_unique<noServiceChargeCheckingType>(name, accNum, bal);
-                } else if (type == typeid(savingsAccountType).name()) {
-                    account = make_unique<savingsAccountType>(name, accNum, bal);
-                } else if (type == typeid(highInterestCheckingType).name()) {
-                    account = make_unique<highInterestCheckingType>(name, accNum, bal);
-                } else if (type == typeid(highInterestSavingsType).name()) {
-                    account = make_unique<highInterestSavingsType>(name, accNum, bal);
-                } else if (type == typeid(certificateOfDepositType).name()) {
-                    account = make_unique<certificateOfDepositType>(name, accNum, bal);
-                }
+             
+
+					if (type == typeid(serviceChargeCheckingType).name()) {
+					    account = make_unique<serviceChargeCheckingType>(name, accNum, bal);
+					} else if (type == typeid(noServiceChargeCheckingType).name()) {
+					    account = make_unique<noServiceChargeCheckingType>(name, accNum, bal);
+					} else if (type == typeid(savingsAccountType).name()) {
+					    account = make_unique<savingsAccountType>(name, accNum, bal, 0.0); // Default interest rate
+					} else if (type == typeid(highInterestCheckingType).name()) {
+					    account = make_unique<highInterestCheckingType>(name, accNum, bal);
+					} else if (type == typeid(highInterestSavingsType).name()) {
+					    account = make_unique<highInterestSavingsType>(name, accNum, bal);
+					} else if (type == typeid(certificateOfDepositType).name()) {
+					    account = make_unique<certificateOfDepositType>(name, accNum, bal, 0.0, 0); // Default interest rate and maturity
+					}
+
+				
 
                 if (account) {
                     accounts.push_back(move(account));

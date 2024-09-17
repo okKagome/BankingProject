@@ -1,24 +1,24 @@
-#ifndef highInterestSavingsType_H
-#define highInterestSavingsType_H
+#ifndef HIGH_INTEREST_SAVINGS_TYPE_H
+#define HIGH_INTEREST_SAVINGS_TYPE_H
 
-#include <string>
 #include "savingsAccountType.h"
+#include <string>
+
 using namespace std;
 
-class highInterestSavingsType: public savingsAccountType {
+class highInterestSavingsType : public savingsAccountType {
 public:
-	highInterestSavingsType(string n, int acctNUmber, double bal);
-	highInterestSavingsType(string n, int acctN, double balance, double intRate, double minBalance);
-	double getMinimumBalance();
-	bool verifyMinimumBalance(double amount);
-	virtual void withdraw(double amount);
-	virtual void print();
-
-protected:
-	double minimumBalance;
+    highInterestSavingsType(string n, int acctNumber, double bal);
+    double getMinimumBalance() const;
+    bool verifyMinimumBalance(double amount);
+    void withdraw(double amount) override;
+    void print() override;
+    string getType() const override { return "High Interest Savings"; }
 
 private:
-	static const double MINIMUM_BALANCE; // 2500.00
-	static const double INTEREST_RATE; //0.05
+    static const double MINIMUM_BALANCE;
+    static const double INTEREST_RATE;
+    double minimumBalance;
 };
-#endif
+
+#endif // HIGH_INTEREST_SAVINGS_TYPE_H

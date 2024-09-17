@@ -1,3 +1,2 @@
-1000,Maddox,24certificateOfDepositType,1000
-1000,01,18savingsAccountType,1000
-1000,Maddox,18savingsAccountType,1000
+1001,Carter,23highInterestSavingsType,250
+1002,David Atwood,18savingsAccountType,1000
