@@ -52,7 +52,7 @@ void certificateOfDepositType::postInterest() {
 	balance = balance + balance * interestRate;
 }
 
-void certificateOfDepositType::withdraw(double /*amount*/) {
+void certificateOfDepositType::withdraw(double amount) {
  /// no code
 }
 

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <algorithm>
 #include "serviceChargeCheckingType.h"
 #include "noServiceChargeCheckingType.h"
 #include "savingsAccountType.h"
