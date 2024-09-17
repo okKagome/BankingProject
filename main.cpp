@@ -1,7 +1,20 @@
 #include <iostream>
+#include "bankAccountType.h"
+#include "savingsAccountType.h"
+#include "highInterestSavingsType.h"
+#include "noServiceChargeCheckingType.h"
+#include "serviceChargeCheckingType.h"
+#include "highInterestCheckingType.h"
+#include "certificateOfDepositType.h"
+#include "checkingAccountType.h"
 #include "createAccount.h"
 #include "editAccount.h"
 #include "lookUpAccount.h"
+#include "deposit.h"
+#include "withdraw.h"
+#include "checkBalance.h"
+#include "listAllAccounts.h"
+#include "deleteAccount.h"
 #include "accountDatabase.h"
 #include "utilityFunctions.h"
 
@@ -27,34 +40,34 @@ int main() {
 
         switch (choice) {
             case '1':
-                createAccount();
+               createAccount();
                 break;
             case '2':
-                editAccount();
+               editAccount();
                 break;
             case '3':
-                lookUpAccount();
+               lookUpAccount();
                 break;
             case '4':
-                cout << "Deposit function not yet implemented.\n";
+					deposit();
                 break;
             case '5':
-                cout << "Withdraw function not yet implemented.\n";
+					withdraw();
                 break;
             case '6':
-                cout << "Check Balance function not yet implemented.\n";
+					checkBalance();
                 break;
             case '7':
-                cout << "List All Accounts function not yet implemented.\n";
+					listAllAccounts();
                 break;
             case '8':
-                cout << "Delete Account function not yet implemented.\n";
+					deleteAccount();
                 break;
             case '9':
-                cout << "Thank you for using the Bank System. Goodbye!\n";
+					cout << "Thank you for using the Bank System. Goodbye!\n";
                 break;
             default:
-                cout << "Invalid choice. Please try again.\n";
+               cout << "Invalid choice. Please try again.\n";
         }
         if (choice != '9') {
             cout << "Press Enter to continue...";

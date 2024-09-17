@@ -5,6 +5,8 @@
 #include <iostream>
 #include <iomanip>
 #include <memory>
+#include <limits>
+#include <cctype>
 
 using namespace std;
 
@@ -40,7 +42,8 @@ void withdraw() {
             }
         }
 
-        double newBalance = account->getBalance() - withdrawalAmount;
+			double currentBalance = account->getBalance();
+			double newBalance = currentBalance - withdrawalAmount;
 
         // Confirm withdrawal
         cout << "\nWithdrawal Summary:" << endl;
@@ -52,7 +55,7 @@ void withdraw() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (toupper(confirm) == 'Y') {
-            account->setBalance(newBalance);
+            account->withdraw(withdrawalAmount);
             updateAccountInDatabase(*account);
 
             // Print receipt

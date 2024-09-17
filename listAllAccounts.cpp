@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <vector>
 #include <memory>
+#include <limits>
+#include <typeinfo>
 
 using namespace std;
 
@@ -24,7 +26,7 @@ void listAllAccounts() {
     for (const auto& account : accounts) {
         cout << setw(10) << account->getAccountNumber()
              << setw(20) << account->getName()
-             << setw(20) << account->getType()
+             << setw(20) << typeid(*account).name()
              << setw(15) << fixed << setprecision(2) << account->getBalance() << endl;
     }
 

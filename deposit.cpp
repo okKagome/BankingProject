@@ -5,7 +5,8 @@
 #include <iostream>
 #include <iomanip>
 #include <memory>
-
+#include <limits>
+#include <cctype>
 using namespace std;
 
 void deposit() {
@@ -35,7 +36,7 @@ void deposit() {
         }
 
         double newBalance = account->getBalance() + depositAmount;
-        
+
         // Confirm deposit
         cout << "\nDeposit Summary:" << endl;
         cout << "Amount to deposit: $" << fixed << setprecision(2) << depositAmount << endl;
@@ -46,7 +47,7 @@ void deposit() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (toupper(confirm) == 'Y') {
-            account->setBalance(newBalance);
+            account->deposit(depositAmount);
             updateAccountInDatabase(*account);
 
             // Print receipt
@@ -54,7 +55,7 @@ void deposit() {
             cout << "Account Number: " << account->getAccountNumber() << endl;
             cout << "Account Holder: " << account->getName() << endl;
             cout << "Deposit Amount: $" << fixed << setprecision(2) << depositAmount << endl;
-            cout << "New Balance: $" << fixed << setprecision(2) << newBalance << endl;
+            cout << "New Balance: $" << fixed << setprecision(2) << account->getBalance() << endl;
             cout << "Transaction Date: " << getCurrentDate() << endl;
             cout << "----------------------" << endl;
 

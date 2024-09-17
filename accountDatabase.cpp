@@ -13,7 +13,7 @@ using namespace std;
 
 const string FILE_NAME = "accounts.txt";
 
-void saveAccount(const unique_ptr<bankAccountType>& account) {
+void saveAccount(unique_ptr<bankAccountType>& account) {
     ofstream file(FILE_NAME, ios::app);
     if (file.is_open()) {
         file << account->getAccountNumber() << ","
@@ -109,14 +109,25 @@ bool removeAccountFromDatabase(int accountNumber) {
     return false;
 }
 
-bool updateAccountInDatabase(const bankAccountType& updatedAccount) {
+bool updateAccountInDatabase(bankAccountType& updatedAccount) {
     vector<unique_ptr<bankAccountType>> accounts = loadAccounts();
     bool found = false;
-    
-    for (auto& account : accounts) {
+
+for (auto& account : accounts) {
         if (account->getAccountNumber() == updatedAccount.getAccountNumber()) {
             account->setName(updatedAccount.getName());
-            account->setBalance(updatedAccount.getBalance());
+
+            // Get the current balance and the new balance
+            double currentBalance = account->getBalance();
+            double newBalance = updatedAccount.getBalance();
+
+            // Calculate the difference and adjust balance accordingly
+            if (newBalance > currentBalance) {
+                account->deposit(newBalance - currentBalance);
+            } else if (newBalance < currentBalance) {
+                account->withdraw(currentBalance - newBalance);
+            }
+
             found = true;
             break;
         }

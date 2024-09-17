@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <memory>
+#include <limits>
 
 using namespace std;
 
@@ -38,10 +39,15 @@ void editAccount() {
                 break;
             }
             case 2: {
-                double newBalance;
+               double newBalance;
                 cout << "Current Balance: $" << fixed << setprecision(2) << account->getBalance() << endl;
                 newBalance = getValidAmount("Enter new balance: $");
-                account->setBalance(newBalance);
+					double currentBalance = account->getBalance();
+						if (newBalance > currentBalance) {
+							account->deposit(newBalance - currentBalance);
+						} else if (newBalance < currentBalance) {
+               	   account->withdraw(currentBalance - newBalance);
+                }
                 cout << "Balance updated successfully." << endl;
                 break;
             }
@@ -53,9 +59,12 @@ void editAccount() {
                 char confirm;
                 cin >> confirm;
                 if (toupper(confirm) == 'Y') {
-                    updateAccountInDatabase(*account);
+                    if (updateAccountInDatabase(*account)) {
                     cout << "Changes saved successfully." << endl;
                     return;
+                } else {
+							cout << "Failed to save changes." << endl;
+                    }
                 }
                 break;
             }
@@ -67,7 +76,7 @@ void editAccount() {
         }
 
         cout << "Press Enter to continue...";
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin.get();
     }
 }

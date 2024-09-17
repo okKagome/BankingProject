@@ -5,6 +5,8 @@
 #include <iostream>
 #include <iomanip>
 #include <memory>
+#include <limits>
+#include <typeinfo>
 
 using namespace std;
 
@@ -19,7 +21,7 @@ void deleteAccount() {
         cout << "\nAccount Details:" << endl;
         cout << "Account Number: " << account->getAccountNumber() << endl;
         cout << "Account Holder: " << account->getName() << endl;
-        cout << "Account Type: " << account->getType() << endl;
+        cout << "Account Type: " << typeid(*account).name() << endl;
         cout << "Current Balance: $" << fixed << setprecision(2) << account->getBalance() << endl;
 
         cout << "\nAre you sure you want to delete this account? This action cannot be undone. (Y/N): ";
